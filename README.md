@@ -1,4 +1,4 @@
-# Student Management Project
+# EngageU - University Student Information Management System
 
 This project is an implementation of a student management system using C#, ASP.NET, and SSMS database. It provides functionality to manage student records, including adding, updating, and deleting student information.
 
