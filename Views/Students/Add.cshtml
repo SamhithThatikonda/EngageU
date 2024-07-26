@@ -1,22 +1,25 @@
 @{}
+
+@model WebApplication1.Models.AddStudentViewModel
+
 <h1> Add Student </h1>
 
 <div class = "mt-3">
     <label class = "form-label">Name</label>
-    <input type = "text" class = "formal-control">
+    <input type = "text" class = "formal-control" asp-for="Name">
 </div>
 
 <div class = "mt-3">
     <label class = "form-label">Email</label>
-    <input type = "email" class = "formal-control">
+    <input type = "email" class = "formal-control" asp-for = "Email">
 </div>
 <div class = "mt-3">
     <label class = "form-label">Phone</label>
-    <input type = "text" class = "formal-control">
+    <input type = "text" class = "formal-control" asp-for = "PhoneNumber">
 </div>
     
 <div class = "mt-3">
-    <input = "checkbox" class = "form-check-input" id ="Subscribed">
+    <input = "checkbox" class = "form-check-input" id ="Subscribed" asp-for = "SubscribedToNewsletter">
     <label class = "form-check-label" for = "Subscribed">Subscribed</label>
 </div>
 
