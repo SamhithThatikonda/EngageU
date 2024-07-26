@@ -35,5 +35,12 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var students = await dbContext.Students.ToListAsync();
+            return View(students);
+        }
     }
 }
