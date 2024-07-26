@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
+using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Models.Entities;
 
 namespace WebApplication1.Controllers
 {
     public class StudentsController : Controller
     {
+        private readonly ApplicationDbContext dbContext;
+        public StudentsController(ApplicationDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
         // GET
         [HttpGet]
         public IActionResult Add()
@@ -14,14 +21,19 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddStudentViewModel model)
+        public async Task<IActionResult> Add(AddStudentViewModel model)
         {
-            if (!ModelState.IsValid)
+            var student = new Student
             {
-                return View(model);
-            }
+                Name = model.Name,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                SubscribedToNewsletter = model.SubscribedToNewsletter
+            };
+            await dbContext.Students.AddAsync(student);
+            await dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return View();
         }
     }
 }
