@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models.Entities;
 
 namespace WebApplication1.Data
 {
@@ -12,7 +13,7 @@ namespace WebApplication1.Data
             
         }
         // DBSet is a collection of entities that can be queried from the database, and it includes methods for filtering, sorting, and more.
-        public DbSet<Student> MyProperty { get; set; }
+        public DbSet<Student> Students { get; set; }
         
     }
 }
