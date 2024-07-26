@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -41,6 +42,30 @@ namespace WebApplication1.Controllers
         {
             var students = await dbContext.Students.ToListAsync();
             return View(students);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var student = await dbContext.Students.FirstOrDefaultAsync(s => s.Id == id);
+            return View(student);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Student viewModel)
+        {
+            var student = await dbContext.Students.FirstOrDefaultAsync(s => s.Id == viewModel.Id);
+            if (student != null)
+            {
+                student.Name = viewModel.Name;
+                student.Email = viewModel.Email;
+                student.PhoneNumber = viewModel.PhoneNumber;
+                student.SubscribedToNewsletter = viewModel.SubscribedToNewsletter;
+
+                await dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("List", "Students");
         }
     }
 }
